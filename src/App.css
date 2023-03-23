@@ -1,38 +1,134 @@
-.App {
-  text-align: center;
+html, body { padding: 10px; }
+
+.v-epic-not-planned, .v-task-not-planned, .v-subtask-not-planned {
+  display: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+smart-gantt-chart {
+    height: 490px;
+    --smart-gantt-chart-task-default-height: 34px;
+
+    --smart-gantt-chart-task-fill-border-radius: 2.5px;
+    --smart-gantt-chart-task-tree-splitter-bar-fit-size: var(--smart-gantt-chart-task-default-height);
+
+    --smart-gantt-chart-task-color: linear-gradient(-45deg, rgba(37, 88, 147, 1), rgba(64, 148, 247, 1));
+    --smart-gantt-chart-task-label-color: white;
+    --smart-gantt-chart-task-label-color-selected: white;
+
+    --smart-gantt-chart-project-color: linear-gradient(-45deg, rgba(37, 88, 147, 1), rgba(64, 148, 247, 1));
+    --smart-gantt-chart-project-label-color: white;
+    --smart-gantt-chart-project-label-color-selected: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.v-epic{
+  --smart-gantt-chart-task-color: repeating-linear-gradient(-45deg, rgba(87, 243, 128, 1), rgba(87, 243, 128, 1) 15px, rgba(71, 209, 108, 1) 0, rgba(71, 209, 108, 1) 30px);
+  --smart-gantt-chart-task-fill-border-radius: 4px;
+  --smart-gantt-chart-task-label-color: rgb(10, 33, 16);
+  --smart-gantt-chart-task-label-color-selected: white;
+  --smart-gantt-chart-project-color: repeating-linear-gradient(-45deg, rgba(87, 243, 128, 1), rgba(87, 243, 128, 1) 15px, rgba(71, 209, 108, 1) 0, rgba(71, 209, 108, 1) 30px);
+  --smart-gantt-chart-project-fill-border-radius: 4px;
+  --smart-gantt-chart-project-label-color: rgb(10, 33, 16);
+  --smart-gantt-chart-project-label-color-selected: white;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.v-task{
+  --smart-gantt-chart-task-color: repeating-linear-gradient(-45deg, rgba(108, 54, 142, 1), rgba(196, 121, 243, 1) );
+  --smart-gantt-chart-task-fill-border-radius: 4px;
+  --smart-gantt-chart-project-color: repeating-linear-gradient(-45deg, rgba(108, 54, 142, 1), rgba(196, 121, 243, 1) );
+  --smart-gantt-chart-project-fill-border-radius: 4px;
 }
 
-.App-link {
-  color: #61dafb;
+.v-subtask{
+  --smart-gantt-chart-task-color: linear-gradient(-45deg, rgba(37, 88, 147, 1), rgba(64, 148, 247, 1));
+  --smart-gantt-chart-task-fill-border-radius: 4px;
+  --smart-gantt-chart-project-color: linear-gradient(-45deg, rgba(37, 88, 147, 1), rgba(64, 148, 247, 1));
+  --smart-gantt-chart-project-fill-border-radius: 4px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.smart-splitter{
+  /* рабочее поле */ 
+  background-color: rgba(247,248,251,1);
 }
+
+smart-menu {
+    --smart-menu-vertical-default-width: 100px;
+    --smart-menu-vertical-default-height: auto;
+}
+
+.smart-menu .smart-menu-item-label-container {
+    padding: 10px 20px 10px 20px;
+}
+
+/* ------------ Google fonts ------------ */
+
+/* fallback */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v31/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    margin-right: 10px;
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../public/fonts/icomoon.eot?rx5i94');
+  src:  url('../public/fonts/icomoon.eot?rx5i94#iefix') format('embedded-opentype'),
+    url('../public/fonts/icomoon.ttf?rx5i94') format('truetype'),
+    url('../public/fonts/icomoon.woff?rx5i94') format('woff'),
+    url('../public/fonts/icomoon.svg?rx5i94#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-epic:before {
+  content: "\e900";
+  color: #47d16c;
+}
+.icon-subtask:before {
+  content: "\e901";
+  color: #4094f7;
+}
+.icon-task:before {
+  content: "\e902";
+  color: #c479f3;
+}
+
+/* ------------ */
