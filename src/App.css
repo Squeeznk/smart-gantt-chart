@@ -5,7 +5,7 @@ html, body { padding: 10px; }
 }
 
 smart-gantt-chart {
-    height: 490px;
+    height: 400px;
     --smart-gantt-chart-task-default-height: 34px;
 
     --smart-gantt-chart-task-fill-border-radius: 2.5px;

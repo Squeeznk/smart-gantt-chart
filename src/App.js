@@ -17,7 +17,7 @@ const App = () => {
   const locale = 'ru';
   const disableSelection = true;
   const disableTaskProgressChange = true;
-  const showProgressLabel = false;
+  const showProgressLabel = true;
   const snapToNearest = false;
 
   function getDayInWeek (week,day,year) {
@@ -95,19 +95,15 @@ const App = () => {
     {
       label: 'Начало',
       value: 'dateStart',
-      size: 100,
+      size: 150,
       dateFormat: 'dd.MM.yyyy',
-      // hh:mm:ss
-      //  formatFunction: function (value, item) {
-      //   //'DD.MM.YYYY h:mm:ss'
-      //   console.log( value, value.toISOString(), item.dateStart );
-      //   let dateValue = new Date(value);
-      //   if(moment(dateValue.toISOString()).isAfter(moment('2023.01.02'))){
-      //     return moment(item.dateStart).format('DD.MM.YYYY h:mm:ss');
-      //   } else { 
-      //     return '<span style="color:#ddd">' + moment(item.dateStart).format('DD.MM.YYYY h:mm:ss') + '</span>';
-      //   }
-      //return value;
+      //formatFunction: function(value, item) {
+        //const pattern = /v-(task|epic|subtask)-not-planned/
+        //if( pattern.test(item.class)){
+        //  return ''
+        //}else{
+        //  return value
+        //}
       //}
     },
     {
@@ -115,15 +111,14 @@ const App = () => {
       value: 'dateEnd',
       size: 100,
       dateFormat: 'dd.MM.yyyy',  
-      // formatFunction: function (value, item) {
-      //   //console.log('DateEnd: ', value, item.dateStart);
-      //   let dateValue = new Date(value);
-      //   if(moment(dateValue.toISOString()).isAfter(moment('2023.01.02'))){
-      //     return moment(item.dateEnd).format('DD.MM.YYYY h:mm:ss');
-      //   } else { 
-      //     return '<span style="color:#ddd">' + moment(item.dateEnd).format('DD.MM.YYYY h:mm:ss') + '</span>';
-      //   }
-      // }
+      //formatFunction: function (value, item) {
+        //const pattern = /v-(task|epic|subtask)-not-planned/
+        //if( pattern.test(item.class)){
+        //  return ''
+        //}else{
+        //  return value
+        //}
+      //}
     }
 	];
 
@@ -131,16 +126,16 @@ const App = () => {
 
   // Сэмпл на производительность
 
-  // for (let i = 9; i < 1000 ; i++) {
-  //   dataSource.push({
-  //     "id":"id" + i,
-  //     "label":"Задача 1."+i,
-  //     "number":"<span class='icon-task'></span> ИП-0000000" + i,
-  //     "type":"task",
-  //     "level":1,
-  //     "class":"v-task-not-planned"
-  //   })
-  // }
+  for (let i = 9; i < 500 ; i++) {
+    dataSource.push({
+      "id":"id" + i,
+      "label":"Задача 1."+i,
+      "number":"ИП-0000000" + i,
+      "type":"task",
+      "level":1,
+      "class":"v-task-not-planned"
+    })
+  }
 
 
 
@@ -152,7 +147,9 @@ const App = () => {
 
 
   const handleReady = (event) => {
+    const ganttChart = document.querySelector('smart-gantt-chart');
     //console.log(ganttChart.tasks);
+		ganttChart.refresh();
   }
 
   const handleClick = (event) => {
@@ -198,7 +195,7 @@ const App = () => {
           );
 
       // по установленному полу class определяем была ли задача 'not-planned'
-      const pattern = /v-(task|epic|subtask)-not-planned/;
+      const pattern = /v-(task|epic|subtask)-not-planned/
 
       if( pattern.test(clickedTask.class) ){
         // если была 'not-planned', то устанавливаем нужные даынне в даты и апдейтим class
@@ -229,7 +226,7 @@ const App = () => {
           onClick={handleClick}
           min="2023-01-01"
           dateStart="2023-03-01"
-          dateEnd="2023-03-09"
+          dateEnd="2023-04-30"
           max="2024-01-01"
           dataSource={dataSource} 
           taskColumns={taskColumns} 
