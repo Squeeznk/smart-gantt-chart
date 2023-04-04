@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { GanttChart } from 'smart-webcomponents-react/ganttchart';
 import { DropDownList, ListItem } from 'smart-webcomponents-react/dropdownlist';
+import { Toast } from 'smart-webcomponents-react/toast';
 import moment from 'moment';
 import 'moment/locale/ru';
 import 'smart-webcomponents-react/source/styles/smart.default.css';
 import './App.css';
-import jsondata from './data.json';  
+import jsondata from './data.json';
+import jsondata1 from './data1.json';  
 
 const App = () => {
 
@@ -17,7 +19,7 @@ const App = () => {
   const locale = 'ru';
   const disableSelection = true;
   const disableTaskProgressChange = true;
-  const showProgressLabel = true;
+  const showProgressLabel = false;
   const snapToNearest = false;
 
   function getDayInWeek (week,day,year) {
@@ -27,18 +29,17 @@ const App = () => {
       return d
   }
     
-
   const timelineHeaderFormatFunction = (date, type, isHeaderDetails, value) => {
 
     const ganttChart = document.querySelector('smart-gantt-chart');
     const isodt = date.toISOString();
     
     if (type === 'hour') {
-      return '<div dtmom="' + date.toLocaleDateString() + ' ' +  date.toLocaleTimeString() + '">' + moment(date).format('LT') + '</div>';
+      return '<div dtmom="' + moment(date).format('DD.MM.YYYY hh.mm.ss') + '">' + moment(date).format('LT') + '</div>';
     }
 
     if (type === 'day') {
-      return '<div dtmom="' + date.toLocaleDateString() + ' ' +  date.toLocaleTimeString() + '">' + date.toLocaleDateString(ganttChart.locale, { weekday: 'short', day: 'numeric'}) + '</div>';
+      return '<div dtmom="' + moment(date).format('DD.MM.YYYY hh.mm.ss') + '">' + date.toLocaleDateString(ganttChart.locale, { weekday: 'short', day: 'numeric'}) + '</div>';
 
     }
     
@@ -50,27 +51,20 @@ const App = () => {
         );
       }else{
         const weekstart = getDayInWeek(value,1,date.getFullYear());
-        if(moment(weekstart).startOf('week').month() === moment(weekstart).endOf('week').month()){
-          return (
-            '<div dtmom="' + date.toLocaleDateString() + ' ' +  date.toLocaleTimeString() + '">' + 
-            moment(weekstart).startOf('week').format('DD - ') +
-            moment(weekstart).endOf('week').format('DD MMM') + 
-            '</div>'
-          );
-        }else{
-          return (
-            '<div dtmom="' + date.toLocaleDateString() + ' ' +  date.toLocaleTimeString() + '">' + 
-            moment(weekstart).startOf('week').format('DD MMM - ') +
-            moment(weekstart).endOf('week').format('DD MMM') + 
-            '</div>'
-          );          
-        }
+        return (
+          '<div dtmom="' + moment(date).format('DD.MM.YYYY hh.mm.ss') + '">' + 
+          moment(weekstart).startOf('week').format('DD ' + 
+          (moment(weekstart).startOf('week').month() !== moment(weekstart).endOf('week').month() ? 'MMM ' : '') + 
+          '- ') +
+          moment(weekstart).endOf('week').format('DD MMM') + 
+          '</div>'
+        )
       }
     }
 
     if (type === 'month') { 
         return (
-          '<div dtmom="' + date.toLocaleDateString() + ' ' +  date.toLocaleTimeString() + '">' + moment(isodt).format('MMMM') + '</div>'
+          '<div dtmom="' + moment(date).format('DD.MM.YYYY hh.mm.ss') + '">' + moment(isodt).format('MMMM') + '</div>'
         );
     }
 
@@ -97,46 +91,46 @@ const App = () => {
       value: 'dateStart',
       size: 150,
       dateFormat: 'dd.MM.yyyy',
-      //formatFunction: function(value, item) {
-        //const pattern = /v-(task|epic|subtask)-not-planned/
-        //if( pattern.test(item.class)){
-        //  return ''
-        //}else{
-        //  return value
-        //}
-      //}
+      formatFunction: function(value, item) {
+        const pattern = /v-(task|epic|subtask)-not-planned/
+        if( pattern.test(item.class)){
+          return ''
+        }else{
+          return moment(item.dateStart).format('DD.MM.YYYY');
+        }
+      }
     },
     {
       label: 'Окончание',
       value: 'dateEnd',
       size: 100,
       dateFormat: 'dd.MM.yyyy',  
-      //formatFunction: function (value, item) {
-        //const pattern = /v-(task|epic|subtask)-not-planned/
-        //if( pattern.test(item.class)){
-        //  return ''
-        //}else{
-        //  return value
-        //}
-      //}
+      formatFunction: function(value, item) {
+        const pattern = /v-(task|epic|subtask)-not-planned/
+        if( pattern.test(item.class)){
+          return ''
+        }else{
+          return moment(item.dateEnd).format('DD.MM.YYYY');
+        }
+      }
     }
 	];
 
-  const dataSource = JSON.parse(JSON.stringify(jsondata));
+  const [dataSource, setDataSource] = useState([]);
+  const [dataSourceVariant, setDataSourceVariant] = useState(0);
 
   // Сэмпл на производительность
 
-  for (let i = 9; i < 500 ; i++) {
-    dataSource.push({
-      "id":"id" + i,
-      "label":"Задача 1."+i,
-      "number":"ИП-0000000" + i,
-      "type":"task",
-      "level":1,
-      "class":"v-task-not-planned"
-    })
-  }
-
+  // for (let i = 9; i < 1000 ; i++) {
+  //   dataSource.push({
+  //     "id":"id" + i,
+  //     "label":"Задача 1."+i,
+  //     "number":"ИП-0000000" + i,
+  //     "type":"task",
+  //     "level":1,
+  //     "class":"v-task-not-planned"
+  //   })
+  // }
 
 
   const handleChange = (event) => {
@@ -144,13 +138,6 @@ const App = () => {
 		ganttChart.view = event.detail.value;
 	}
   
-
-
-  const handleReady = (event) => {
-    const ganttChart = document.querySelector('smart-gantt-chart');
-    //console.log(ganttChart.tasks);
-		ganttChart.refresh();
-  }
 
   const handleClick = (event) => {
 
@@ -200,19 +187,72 @@ const App = () => {
       if( pattern.test(clickedTask.class) ){
         // если была 'not-planned', то устанавливаем нужные даынне в даты и апдейтим class
         const newdatestart = moment(targetdate, "DD.MM.YYYY hh.mm.ss").toISOString();
+        ganttChart.beginUpdate()
         ganttChart.updateTask(clickedTask.id, { 
             "dateStart": newdatestart,  
-            "dateEnd": moment(newdatestart).add(3,'days').toString(),
+            "dateEnd": moment(newdatestart).add(5,'days').toString(),
             "class": clickedTask.class.replace('-not-planned','')
-        });         
+        }); 
+        ganttChart.endUpdate();
+        ganttChart.refresh()
       }
     }
   }
 
 
+  const handleConnEnd = (event) => {
+    if(event.detail.type !== 1){
+      
+      const toast = document.querySelector('smart-toast');
+      toast.value = "Этот тип связи не поддерживается"
+      toast.open();
+
+      const detail = event.detail;
+      const ganttChart = document.querySelector('smart-gantt-chart');
+      ganttChart.removeConnection(detail.startIndex, detail.endIndex, detail.type);
+    } 
+  }
+
+
+  const handleReady = (event) => {
+    const toast = document.querySelector('smart-toast');
+    toast.value = "Загрузились"
+    toast.type = "success";
+    toast.open();
+
+    setDataSourceVariant(1); // jsondata
+    setDataSource(JSON.parse(JSON.stringify(jsondata)));
+
+    const ganttChart = document.querySelector('smart-gantt-chart');
+    ganttChart.scrollWidth = 100;
+  }
+
+  const handleReloadData = (event) => {
+    let mockData = null;
+    if(dataSourceVariant === 1){
+      setDataSourceVariant(2); // jsondata1
+      mockData = JSON.parse(JSON.stringify(jsondata1));
+    } else {
+      setDataSourceVariant(1); // jsondata
+      mockData = JSON.parse(JSON.stringify(jsondata));
+    }
+    setDataSource(mockData.map((item) => ({ ...item })));
+  }
+
+  const scrollUp = (event) => {
+    const ganttChart = document.querySelector('smart-gantt-chart');
+    ganttChart.scrollTo(0,ganttChart.scrollLeft + 300);
+  }
+
+  const scrollDown = (event) => {
+    const ganttChart = document.querySelector('smart-gantt-chart');
+    ganttChart.scrollTo(0,ganttChart.scrollLeft - 300);
+  }
+
 
 	return (
 		<div>
+      <button onClick={handleReloadData}>Reload dataSet</button>
       <div className="option">
           <h3>Детализация:</h3>
           <DropDownList onChange={handleChange}>
@@ -221,11 +261,18 @@ const App = () => {
               <ListItem value="week" selected>Неделя</ListItem>
           </DropDownList>
       </div>
+      <div style={{float: 'right', display: 'block', width: '100%'}}>
+        <button style={{float: 'right'}} onClick={scrollUp}>&gt;</button>
+        <button style={{float: 'right'}} onClick={scrollDown}>&lt;</button>
+      </div>
+      <Toast position="top-right" showCloseButton autoClose>Toast!</Toast>
+      
 			<GanttChart 
           onReady={handleReady}
           onClick={handleClick}
+          onConnectionEnd={handleConnEnd}
           min="2023-01-01"
-          dateStart="2023-03-01"
+          dateStart="2023-02-25"
           dateEnd="2023-04-30"
           max="2024-01-01"
           dataSource={dataSource} 

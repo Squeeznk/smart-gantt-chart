@@ -1,0 +1,41 @@
+[
+	{
+		"id":"id1",
+		"label":"Эпик 1",
+		"number":"ИП-00000001",
+		"dateStart":"2023-02-28T00:00:00.000Z",
+		"dateEnd":"2023-03-03T00:00:00.000Z",
+		"type":"Project",
+		"level":1,
+		"expanded":true,
+		"class":"v-epic",
+		"dragProject":true,
+		"disableResize":false,
+		"synchronized":false,
+		"connections":[],
+		"tasks":[
+			{
+				"id":"id2",
+				"label":"Задача 1.1",
+				"number":"ИП-00000002",
+				"dateStart":"2023-03-02T00:00:00.000Z",
+				"dateEnd":"2023-03-04T00:00:00.000Z",
+				"type":"Project",
+				"level":2,
+				"expanded":true,
+				"class":"v-task",
+				"dragProject":true,
+				"synchronized":false,
+				"tasks":[]
+			}			
+		]
+	},
+	{
+		"id":"id8",
+		"label":"Эпик 1.5",
+		"number":"ИП-00000008",
+		"type":"Project",
+		"level":1,
+		"class":"v-epic-not-planned"
+	}	
+]

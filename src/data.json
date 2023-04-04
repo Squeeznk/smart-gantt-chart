@@ -88,6 +88,6 @@
 		"number":"ИП-00000008",
 		"type":"task",
 		"level":1,
-		"class":"v-task-not-planned"
+		"class":"v-epic-not-planned"
 	}	
 ]
