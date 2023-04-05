@@ -1,41 +1,86 @@
 [
-	{
-		"id":"id1",
-		"label":"Эпик 1",
-		"number":"ИП-00000001",
-		"dateStart":"2023-02-28T00:00:00.000Z",
-		"dateEnd":"2023-03-03T00:00:00.000Z",
-		"type":"Project",
-		"level":1,
-		"expanded":true,
-		"class":"v-epic",
-		"dragProject":true,
-		"disableResize":false,
-		"synchronized":false,
-		"connections":[],
-		"tasks":[
-			{
-				"id":"id2",
-				"label":"Задача 1.1",
-				"number":"ИП-00000002",
-				"dateStart":"2023-03-02T00:00:00.000Z",
-				"dateEnd":"2023-03-04T00:00:00.000Z",
-				"type":"Project",
-				"level":2,
-				"expanded":true,
-				"class":"v-task",
-				"dragProject":true,
-				"synchronized":false,
-				"tasks":[]
-			}			
-		]
-	},
-	{
-		"id":"id8",
-		"label":"Эпик 1.5",
-		"number":"ИП-00000008",
-		"type":"Project",
-		"level":1,
-		"class":"v-epic-not-planned"
-	}	
-]
+    {
+      "dateStart": "2023-03-23T00:00:00",
+      "data_task": "2023-02-10T00:00:00",
+      "resources": [],
+      "connections": [],
+      "tasks": [],
+      "project_id": "qqr",
+      "level": 1,
+      "disableResize": false,
+      "expanded": true,
+      "businessType": "task",
+      "dragProject": true,
+      "name": "Копия: На некликабельных элементах меняется курсор на hand",
+      "synchronized": false,
+      "id": "khqkffkfffkgdsgqqqqqqk",
+      "task_date_finish": null,
+      "number": "О-000037617",
+      "dateEnd": "2023-07-20T00:00:00"
+    },
+    {
+      "dateStart": "2023-03-30T00:00:00",
+      "@extData": {
+        "index": 1,
+        "idMeteor": "qhqqffqfffqgdsdqqqqqqq"
+      },
+      "data_task": "2023-02-10T00:00:00",
+      "resources": [],
+      "connections": [],
+      "tasks": [
+        {
+          "name": "Подзадача",
+          "dateStart": "2023-03-19T00:00:00",
+          "@extData": {
+            "index": 2,
+            "idMeteor": "khqkffkfffkgdsdqfsqqqk"
+          },
+          "data_task": "2023-02-10T00:00:00",
+          "project_id": "qqr",
+          "resources": [],
+          "connections": [],
+          "tasks": [],
+          "businessType": "subtask",
+          "number": "О-000037616^01",
+          "dateEnd": "2023-05-31T00:00:00",
+          "task_date_finish": null,
+          "id": "khqkffkfffkgdsdqfsqqqk"
+        }
+      ],
+      "project_id": "qqr",
+      "level": 2,
+      "disableResize": false,
+      "expanded": true,
+      "businessType": "task",
+      "dragProject": true,
+      "name": "На некликабельных элементах меняется курсор на hand",
+      "synchronized": false,
+      "id": "qhqqffqfffqgdsdqqqqqqq",
+      "task_date_finish": null,
+      "number": "О-000037616",
+      "dateEnd": "2023-04-04T00:00:00"
+    },
+    {
+      "dateStart": "2023-03-24T00:00:00",
+      "@extData": {
+        "index": 3,
+        "idMeteor": "qhqqffqfffqgdsdqfsqqqq"
+      },
+      "data_task": "2023-02-10T00:00:00",
+      "resources": [],
+      "connections": [],
+      "tasks": [],
+      "project_id": "qqr",
+      "level": 1,
+      "disableResize": false,
+      "expanded": true,
+      "businessType": "task",
+      "dragProject": true,
+      "name": "Составить список элементов карточки, которые не должны быть кликабеьны",
+      "synchronized": false,
+      "id": "qhqqffqfffqgdsdqfsqqqq",
+      "task_date_finish": null,
+      "number": "О-000037616.01",
+      "dateEnd": null
+    }
+  ]
