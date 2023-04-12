@@ -13,7 +13,10 @@
 		"disableResize":false,
 		"synchronized":false,
 		"connections":[
-			
+			{
+				"target": "4",
+				"type": "1"
+			}
 		],
 		"tasks":[
 			{

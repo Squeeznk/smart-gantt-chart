@@ -8,15 +8,16 @@ import 'smart-webcomponents-react/source/styles/smart.default.css';
 import './App.css';
 import jsondata from './data.json';
 import jsondata1 from './data1.json';  
+import Box from "./components/Box/Box";
 
 const App = () => {
 
-  moment.locale('ru');
+  moment.locale('en');
 
 	const treeSize = '40%';
   const view = 'week';
 	const durationUnit = 'day';
-  const locale = 'ru';
+  const locale = 'en';
   const disableSelection = true;
   const disableTaskProgressChange = true;
   const showProgressLabel = false;
@@ -252,6 +253,7 @@ const App = () => {
 
 	return (
 		<div>
+      <Box></Box>
       <button onClick={handleReloadData}>Reload dataSet</button>
       <div className="option">
           <h3>Детализация:</h3>

@@ -1,86 +1,487 @@
 [
-    {
-      "dateStart": "2023-03-23T00:00:00",
-      "data_task": "2023-02-10T00:00:00",
-      "resources": [],
-      "connections": [],
-      "tasks": [],
-      "project_id": "qqr",
-      "level": 1,
-      "disableResize": false,
-      "expanded": true,
-      "businessType": "task",
-      "dragProject": true,
-      "name": "Копия: На некликабельных элементах меняется курсор на hand",
-      "synchronized": false,
-      "id": "khqkffkfffkgdsgqqqqqqk",
-      "task_date_finish": null,
-      "number": "О-000037617",
-      "dateEnd": "2023-07-20T00:00:00"
+  {
+    "dateStart": null,
+    "@extData": {
+      "index": 0,
+      "idMeteor": "qfqqffqfffqeztbqqqqqqz"
     },
-    {
-      "dateStart": "2023-03-30T00:00:00",
-      "@extData": {
-        "index": 1,
-        "idMeteor": "qhqqffqfffqgdsdqqqqqqq"
-      },
-      "data_task": "2023-02-10T00:00:00",
-      "resources": [],
-      "connections": [],
-      "tasks": [
-        {
-          "name": "Подзадача",
-          "dateStart": "2023-03-19T00:00:00",
-          "@extData": {
-            "index": 2,
-            "idMeteor": "khqkffkfffkgdsdqfsqqqk"
-          },
-          "data_task": "2023-02-10T00:00:00",
-          "project_id": "qqr",
-          "resources": [],
-          "connections": [],
-          "tasks": [],
-          "businessType": "subtask",
-          "number": "О-000037616^01",
-          "dateEnd": "2023-05-31T00:00:00",
-          "task_date_finish": null,
-          "id": "khqkffkfffkgdsdqfsqqqk"
-        }
-      ],
-      "project_id": "qqr",
-      "level": 2,
-      "disableResize": false,
-      "expanded": true,
-      "businessType": "task",
-      "dragProject": true,
-      "name": "На некликабельных элементах меняется курсор на hand",
-      "synchronized": false,
-      "id": "qhqqffqfffqgdsdqqqqqqq",
-      "task_date_finish": null,
-      "number": "О-000037616",
-      "dateEnd": "2023-04-04T00:00:00"
+    "data_task": "2022-02-04T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "ПРОБЛЕМА согласования трудозатрат",
+    "synchronized": false,
+    "id": "qfqqffqfffqeztbqqqqqqz",
+    "task_date_finish": null,
+    "number": "0-000034958",
+    "dateEnd": null
+  },
+  {
+    "dateStart": null,
+    "@extData": {
+      "index": 1,
+      "idMeteor": "tfqtfftfffttfzeqqqqqqt"
     },
-    {
-      "dateStart": "2023-03-24T00:00:00",
-      "@extData": {
-        "index": 3,
-        "idMeteor": "qhqqffqfffqgdsdqfsqqqq"
+    "data_task": "2022-02-11T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Создание справочника для отображения справочной информации у полей и у отчетов",
+    "synchronized": false,
+    "id": "tfqtfftfffttfzeqqqqqqt",
+    "task_date_finish": null,
+    "number": "0-000035094",
+    "dateEnd": null
+  },
+  {
+    "@connections": [
+      {
+        "type": 1,
+        "target": 4
       },
-      "data_task": "2023-02-10T00:00:00",
-      "resources": [],
-      "connections": [],
-      "tasks": [],
-      "project_id": "qqr",
-      "level": 1,
-      "disableResize": false,
-      "expanded": true,
-      "businessType": "task",
-      "dragProject": true,
-      "name": "Составить список элементов карточки, которые не должны быть кликабеьны",
-      "synchronized": false,
-      "id": "qhqqffqfffqgdsdqfsqqqq",
-      "task_date_finish": null,
-      "number": "О-000037616.01",
-      "dateEnd": null
-    }
-  ]
+      {
+        "type": 1,
+        "target": 4
+      },
+      {
+        "type": 1,
+        "target": 4
+      },
+      {
+        "type": 1,
+        "target": 4
+      }
+    ],
+    "dateStart": "2023-04-09T00:00:00",
+    "@extData": {
+      "index": 2,
+      "idMeteor": "МТ-16"
+    },
+    "data_task": "2023-04-11T00:00:00",
+    "resources": [],
+    "connections": [
+      {
+        "type": 1,
+        "target": 4
+      },
+      {
+        "type": 1,
+        "target": 4
+      },
+      {
+        "type": 1,
+        "target": 4
+      },
+      {
+        "type": 1,
+        "target": 4
+      }
+    ],
+    "tasks": [
+      {
+        "name": "Подзадача",
+        "dateStart": "2023-04-07T00:00:00",
+        "@extData": {
+          "index": 3,
+          "idMeteor": "МТ-18"
+        },
+        "data_task": "2023-04-11T00:00:00",
+        "project_id": "qqr",
+        "resources": [],
+        "connections": [],
+        "tasks": [],
+        "businessType": "subtask",
+        "number": "МТ-16^МТ-18",
+        "dateEnd": "2023-04-12T00:00:00",
+        "task_date_finish": null,
+        "id": "МТ-18"
+      }
+    ],
+    "project_id": "qqr",
+    "level": 2,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Тест нового реквеста",
+    "synchronized": false,
+    "id": "МТ-16",
+    "task_date_finish": null,
+    "number": "МТ-16",
+    "dateEnd": "2023-04-14T00:00:00"
+  },
+  {
+    "dateStart": "2023-04-03T00:00:00",
+    "@extData": {
+      "index": 4,
+      "idMeteor": "МТ-17"
+    },
+    "data_task": "2023-04-11T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Связанная задача",
+    "synchronized": false,
+    "id": "МТ-17",
+    "task_date_finish": null,
+    "number": "МТ-17",
+    "dateEnd": "2023-04-08T00:00:00"
+  },
+  {
+    "dateStart": "2023-04-14T00:00:00",
+    "@extData": {
+      "index": 5,
+      "idMeteor": "МТ-19"
+    },
+    "data_task": "2023-04-11T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Еще тест",
+    "synchronized": false,
+    "id": "МТ-19",
+    "task_date_finish": null,
+    "number": "МТ-19",
+    "dateEnd": "2023-04-19T00:00:00"
+  },
+  {
+    "@connections": [
+      {
+        "type": 1,
+        "target": 5
+      },
+      {
+        "type": 1,
+        "target": 5
+      }
+    ],
+    "dateStart": "2023-04-11T00:00:00",
+    "@extData": {
+      "index": 6,
+      "idMeteor": "МТ-20"
+    },
+    "data_task": "2023-04-11T00:00:00",
+    "resources": [],
+    "connections": [
+      {
+        "type": 1,
+        "target": 5
+      },
+      {
+        "type": 1,
+        "target": 5
+      }
+    ],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "СВЯЗАННАЯ ЗАДАЧА",
+    "synchronized": false,
+    "id": "МТ-20",
+    "task_date_finish": null,
+    "number": "МТ-20",
+    "dateEnd": "2023-04-16T00:00:00"
+  },
+  {
+    "dateStart": "2023-04-13T00:00:00",
+    "@extData": {
+      "index": 7,
+      "idMeteor": "МТ-21"
+    },
+    "data_task": "2023-04-11T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "СВ ЗАДАЧА",
+    "synchronized": false,
+    "id": "МТ-21",
+    "task_date_finish": null,
+    "number": "МТ-21",
+    "dateEnd": "2023-04-18T00:00:00"
+  },
+  {
+    "dateStart": "2023-04-12T00:00:00",
+    "@extData": {
+      "index": 8,
+      "idMeteor": "МТ-22"
+    },
+    "data_task": "2023-04-11T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "СВ ЗАДАЧА",
+    "synchronized": false,
+    "id": "МТ-22",
+    "task_date_finish": null,
+    "number": "МТ-22",
+    "dateEnd": "2023-04-17T00:00:00"
+  },
+  {
+    "dateStart": null,
+    "@extData": {
+      "index": 9,
+      "idMeteor": "qhqqffqfffqtfebqqqqqqq"
+    },
+    "data_task": "2022-03-22T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Доработки по фильтрации",
+    "synchronized": false,
+    "id": "qhqqffqfffqtfebqqqqqqq",
+    "task_date_finish": "2022-11-07T00:00:00",
+    "number": "О-000035348",
+    "dateEnd": null
+  },
+  {
+    "@connections": [],
+    "dateStart": "2023-04-11T00:00:00",
+    "@extData": {
+      "index": 10,
+      "idMeteor": "thqtfftffftttebqqqqqqt"
+    },
+    "data_task": "2022-05-13T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Тестирование регресс",
+    "synchronized": false,
+    "id": "thqtfftffftttebqqqqqqt",
+    "task_date_finish": "2022-09-25T00:00:00",
+    "number": "О-000035548",
+    "dateEnd": "2023-04-16T00:00:00"
+  },
+  {
+    "dateStart": "2023-04-12T00:00:00",
+    "@extData": {
+      "index": 11,
+      "idMeteor": "bhqbffbfffbdffkqqqqqqb"
+    },
+    "data_task": "2022-09-12T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Изображения прикрепляются в формате base64",
+    "synchronized": false,
+    "id": "bhqbffbfffbdffkqqqqqqb",
+    "task_date_finish": null,
+    "number": "О-000036002",
+    "dateEnd": "2023-04-17T00:00:00"
+  },
+  {
+    "@connections": [],
+    "dateStart": "2023-04-10T00:00:00",
+    "@extData": {
+      "index": 12,
+      "idMeteor": "uhquffufffudfzdqqqqqqu"
+    },
+    "data_task": "2022-09-29T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Сохраненные конфигурации группировать по проектам",
+    "synchronized": false,
+    "id": "uhquffufffudfzdqqqqqqu",
+    "task_date_finish": null,
+    "number": "О-000036096",
+    "dateEnd": "2023-04-15T00:00:00"
+  },
+  {
+    "dateStart": null,
+    "@extData": {
+      "index": 13,
+      "idMeteor": "shqsffsfffsddbsqqqqqqs"
+    },
+    "data_task": "2022-11-25T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Настройки оповещений Автобота",
+    "synchronized": false,
+    "id": "shqsffsfffsddbsqqqqqqs",
+    "task_date_finish": null,
+    "number": "О-000036681",
+    "dateEnd": null
+  },
+  {
+    "dateStart": "2023-04-11T00:00:00",
+    "@extData": {
+      "index": 14,
+      "idMeteor": "fhqffffffffgtssqqqqqqf"
+    },
+    "data_task": "2023-02-01T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Совещания февраль 2023",
+    "synchronized": false,
+    "id": "fhqffffffffgtssqqqqqqf",
+    "task_date_finish": null,
+    "number": "О-000037511",
+    "dateEnd": "2023-04-16T00:00:00"
+  },
+  {
+    "@connections": [
+      {
+        "type": 1,
+        "target": 16
+      },
+      {
+        "type": 1,
+        "target": 16
+      }
+    ],
+    "dateStart": "2023-04-12T00:00:00",
+    "@extData": {
+      "index": 15,
+      "idMeteor": "ghqgffgfffggbtzqqqqqqg"
+    },
+    "data_task": "2023-03-16T00:00:00",
+    "resources": [],
+    "connections": [
+      {
+        "type": 1,
+        "target": 16
+      },
+      {
+        "type": 1,
+        "target": 16
+      }
+    ],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Продумать документооборот для разных форм сотрудничества с сотрудниками",
+    "synchronized": false,
+    "id": "ghqgffgfffggbtzqqqqqqg",
+    "task_date_finish": null,
+    "number": "О-000037859",
+    "dateEnd": "2023-04-17T00:00:00"
+  },
+  {
+    "dateStart": "2023-04-20T00:00:00",
+    "@extData": {
+      "index": 16,
+      "idMeteor": "ahqaffafffagzfzqqqqqqa"
+    },
+    "data_task": "2023-03-28T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Необходимо протестировать диаграмму Ганта (Анна)",
+    "synchronized": false,
+    "id": "ahqaffafffagzfzqqqqqqa",
+    "task_date_finish": null,
+    "number": "О-000037939",
+    "dateEnd": "2023-04-25T00:00:00"
+  },
+  {
+    "dateStart": null,
+    "@extData": {
+      "index": 17,
+      "idMeteor": "aqwafqaffsagfbbqqqqqqt"
+    },
+    "data_task": "2020-04-26T00:00:00",
+    "resources": [],
+    "connections": [],
+    "tasks": [],
+    "project_id": "qqr",
+    "level": 1,
+    "disableResize": false,
+    "expanded": true,
+    "businessType": "task",
+    "dragProject": true,
+    "name": "Документация 'Метеор'",
+    "synchronized": false,
+    "id": "aqwafqaffsagfbbqqqqqqt",
+    "task_date_finish": null,
+    "number": "ЦУП-0017388",
+    "dateEnd": null
+  }
+]
