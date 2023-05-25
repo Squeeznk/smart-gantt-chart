@@ -1,12 +1,14 @@
 html, body { padding: 10px; }
 
-.v-epic-not-planned, .v-task-not-planned, .v-subtask-not-planned {
+.v-epic-not-planned, .v-task-not-planned, .v-subtask-not-planned,
+.v-epic-childsyncro-not-planned, .v-task-childsyncro-not-planned, .v-subtask-childsyncro-not-planned {
   display: none;
 }
 
 smart-gantt-chart {
     height: 750px;
     --smart-gantt-chart-task-default-height: 34px;
+
 
     --smart-gantt-chart-task-fill-border-radius: 2.5px;
     --smart-gantt-chart-task-tree-splitter-bar-fit-size: var(--smart-gantt-chart-task-default-height);
@@ -18,23 +20,44 @@ smart-gantt-chart {
     --smart-gantt-chart-project-color: linear-gradient(-45deg, rgba(37, 88, 147, 1), rgba(64, 148, 247, 1));
     --smart-gantt-chart-project-label-color: white;
     --smart-gantt-chart-project-label-color-selected: white;
+
+
+  
 }
 
-.v-epic{
-  --smart-gantt-chart-task-color: repeating-linear-gradient(-45deg, rgba(87, 243, 128, 1), rgba(87, 243, 128, 1) 15px, rgba(71, 209, 108, 1) 0, rgba(71, 209, 108, 1) 30px);
+.v-task{
+  --smart-gantt-chart-task-color: repeating-linear-gradient(-45deg, rgba(71, 209, 108, 1), rgba(87, 243, 128, 1));
   --smart-gantt-chart-task-fill-border-radius: 4px;
   --smart-gantt-chart-task-label-color: rgb(10, 33, 16);
   --smart-gantt-chart-task-label-color-selected: white;
-  --smart-gantt-chart-project-color: repeating-linear-gradient(-45deg, rgba(87, 243, 128, 1), rgba(87, 243, 128, 1) 15px, rgba(71, 209, 108, 1) 0, rgba(71, 209, 108, 1) 30px);
+  --smart-gantt-chart-project-color: repeating-linear-gradient(-45deg, rgba(71, 209, 108, 1), rgba(87, 243, 128, 1));
   --smart-gantt-chart-project-fill-border-radius: 4px;
   --smart-gantt-chart-project-label-color: rgb(10, 33, 16);
   --smart-gantt-chart-project-label-color-selected: white;
 }
 
-.v-task{
+.v-task-childsyncro{
+  --smart-gantt-chart-task-color: repeating-linear-gradient(0deg, rgba(71, 209, 108, 1), rgba(71, 209, 108, 1) 9px, rgba(87, 243, 128, 1) 0, rgba(87, 243, 128, 1) 30px);
+  --smart-gantt-chart-task-fill-border-radius: 4px;
+  --smart-gantt-chart-task-label-color: rgb(10, 33, 16);
+  --smart-gantt-chart-task-label-color-selected: white;
+  --smart-gantt-chart-project-color: repeating-linear-gradient(0deg, rgba(71, 209, 108, 1), rgba(71, 209, 108, 1) 9px, rgba(87, 243, 128, 1) 0, rgba(87, 243, 128, 1) 30px);
+  --smart-gantt-chart-project-fill-border-radius: 4px;
+  --smart-gantt-chart-project-label-color: rgb(10, 33, 16);
+  --smart-gantt-chart-project-label-color-selected: white;
+}
+
+.v-epic{
   --smart-gantt-chart-task-color: repeating-linear-gradient(-45deg, rgba(108, 54, 142, 1), rgba(196, 121, 243, 1) );
   --smart-gantt-chart-task-fill-border-radius: 4px;
   --smart-gantt-chart-project-color: repeating-linear-gradient(-45deg, rgba(108, 54, 142, 1), rgba(196, 121, 243, 1) );
+  --smart-gantt-chart-project-fill-border-radius: 4px;
+}
+
+.v-epic-childsyncro{
+  --smart-gantt-chart-task-color: repeating-linear-gradient(0deg, rgb(147, 77, 190), rgb(147, 77, 190) 9px, rgba(196, 121, 243, 1) 0, rgba(196, 121, 243, 1) 30px  );
+  --smart-gantt-chart-task-fill-border-radius: 4px;
+  --smart-gantt-chart-project-color: repeating-linear-gradient(0deg, rgb(147, 77, 190), rgb(147, 77, 190) 9px, rgba(196, 121, 243, 1) 0, rgba(196, 121, 243, 1) 30px  );
   --smart-gantt-chart-project-fill-border-radius: 4px;
 }
 
@@ -42,6 +65,13 @@ smart-gantt-chart {
   --smart-gantt-chart-task-color: linear-gradient(-45deg, rgba(37, 88, 147, 1), rgba(64, 148, 247, 1));
   --smart-gantt-chart-task-fill-border-radius: 4px;
   --smart-gantt-chart-project-color: linear-gradient(-45deg, rgba(37, 88, 147, 1), rgba(64, 148, 247, 1));
+  --smart-gantt-chart-project-fill-border-radius: 4px;
+}
+
+.v-subtask-childsyncro{
+  --smart-gantt-chart-task-color: repeating-linear-gradient(0deg, rgba(37, 88, 147, 1), rgba(37, 88, 147, 1) 9px,  rgb(47, 117, 198) 0, rgb(47, 117, 198) 30px);
+  --smart-gantt-chart-task-fill-border-radius: 4px;
+  --smart-gantt-chart-project-color: repeating-linear-gradient(0deg, rgba(37, 88, 147, 1), rgba(37, 88, 147, 1) 9px,  rgb(47, 117, 198) 0, rgb(47, 117, 198) 30px);
   --smart-gantt-chart-project-fill-border-radius: 4px;
 }
 
@@ -132,3 +162,70 @@ smart-menu {
 }
 
 /* ------------ */
+
+
+smart-gantt-chart .atb {
+  font-size: 12pt;
+  color: rgb(64 64 64);
+  font-weight: 900;
+  padding: 0 6px 0px 6px;
+  margin-left: 4px;
+  background-color: rgb(223 223 223);
+  border-radius: 4px;
+  border-style: none;
+  cursor: pointer;
+}
+
+smart-gantt-chart .disabled {
+  color: rgb(221, 221, 221);
+  background-color: rgb(244, 244, 244);
+}
+
+smart-gantt-chart .atb:hover,
+smart-gantt-chart .atb:active {
+  background-color: rgb(201, 201, 201);
+}
+
+smart-gantt-chart .disabled:hover {
+  color: rgb(221, 221, 221);
+  background-color: rgb(244, 244, 244);
+}
+
+smart-gantt-chart .checked {
+  background-color: rgb(149, 145, 221);
+}
+
+
+.smart-gantt-chart .smart-task-connection-point.end {
+  right: calc(-1 * var(--smart-gantt-chart-task-default-height) / 1.5);
+}
+
+.smart-gantt-chart .smart-task-connection-point.end::after {
+  /*content: url("data:image/svg+xml,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20d%3D%22M96%20512h320l32-352h-384zM320%2064v-64h-128v64h-160v96l32-32h384l32%2032v-96h-160zM288%2064h-64v-32h64v32z%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E ");*/
+  content: "\e9ad";
+  color: #d4e2eb;
+  margin-top: 7px;
+  margin-left: 24px;
+  padding:4px;
+  min-width: 30px;
+  min-height:30px;
+  background-color: #08c;
+  border-radius: 4px;
+
+
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; 
+}
+
+
+

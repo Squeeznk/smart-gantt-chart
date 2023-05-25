@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState/*, useEffect, useRef, MouseEvent*/ } from "react";
 import { GanttChart } from 'smart-webcomponents-react/ganttchart';
 import { DropDownList, ListItem } from 'smart-webcomponents-react/dropdownlist';
 import { Toast } from 'smart-webcomponents-react/toast';
@@ -8,13 +8,20 @@ import 'smart-webcomponents-react/source/styles/smart.default.css';
 import './App.css';
 import jsondata from './data.json';
 import jsondata1 from './data1.json';  
-import Box from "./components/Box/Box";
+//import Box from "./components/Box/Box";
+
+function uuidv4() {
+  // eslint-disable-next-line
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
 
 const App = () => {
 
+  const ganttRef = React.useRef();
   moment.locale('en');
 
-	const treeSize = '40%';
+	const treeSize = '700';
   const view = 'week';
 	const durationUnit = 'day';
   const locale = 'en';
@@ -85,15 +92,15 @@ const App = () => {
     {
       label: 'Задача',
       value: 'label',
-      size: 250
+      size: 200
     },
     {
       label: 'Начало',
       value: 'dateStart',
-      size: 150,
+      //size: 150,
       dateFormat: 'dd.MM.yyyy',
       formatFunction: function(value, item) {
-        const pattern = /v-(task|epic|subtask)-not-planned/
+        const pattern = /v-(task|epic|subtask)(-childsyncro)?-not-planned/
         if( pattern.test(item.class)){
           return ''
         }else{
@@ -107,18 +114,88 @@ const App = () => {
       size: 100,
       dateFormat: 'dd.MM.yyyy',  
       formatFunction: function(value, item) {
-        const pattern = /v-(task|epic|subtask)-not-planned/
+        const pattern = /v-(task|epic|subtask)(-childsyncro)?-not-planned/
         if( pattern.test(item.class)){
           return ''
         }else{
           return moment(item.dateEnd).format('DD.MM.YYYY');
         }
       }
+    },
+    {
+      label: '',
+      value: 'addTask',
+      min: 35,
+      formatFunction: function (value, item) {
+        const itemClass = item.class
+        const pattern = /v-(task|epic|subtask)(-childsyncro)?(-not-planned)?/
+
+        const isPlanned = itemClass.replace(pattern,"$3") !== '-not-planned'
+        const isSyncronized = item.synchronized
+
+        return '' + 
+          '<button class="atb add-tb" title="Добавить дочернюю">+</button>' + 
+          '<button class="atb sync-tb' + (isSyncronized ? " checked" : "")  + (!isPlanned ? " disabled" : "")+ '" title="Синхронизация с дочерними">s</button>' +
+          '<button class="atb unset-tb' + (!isPlanned ? " disabled" : "") + '" title="Отменить планирование">d</button>' + 
+          '<button class="atb reset-tb' + (isPlanned ? " disabled" : "") + '" title="Вернуть предыдущее планирование">v</button>' + 
+          '';
+      }
     }
 	];
 
+
   const [dataSource, setDataSource] = useState([]);
   const [dataSourceVariant, setDataSourceVariant] = useState(0);
+  const [taskNumber, setTaskNumber] = useState(9);
+
+
+
+  // useEffect(() => {
+  //     const ganttChart = document.querySelector('smart-gantt-chart');
+  //     if (ganttChart) {
+  //         ganttChart.addEventListener('mousedown', (e) => {
+  //           document.body.style.cursor = 'grabbing'
+  //           document.addEventListener('mousemove', mouseMoveHandler)
+  //           document.addEventListener('mouseup', mouseUpHandler)
+  //         });
+  //     }
+  // });
+
+  
+  // const xRef = useRef(null);
+  // const dateRef = useRef(null);
+  // const scrollRef = useRef(null);
+
+
+  // const mouseMoveHandler = function (e: MouseEvent) {
+
+  //   if (!dateRef.current) {
+  //        //dateRef is a useref that changes when the gantt event onResizeStart and comes back to null onResizeEnd, this way i prevent scrolling when resizing
+  //     if (xRef.current == null) xRef.current = e.pageX //xRef is a useRef to store last pageX
+      
+  //     if (xRef.current !== e.pageX) {
+  //           const scrollbar = document.querySelectorAll('[smart-id="horizontalScrollBar"]')[2]
+  //           const currentScroll = parseInt(scrollbar.getAttribute('value')) || 0
+  //           const max = parseInt(scrollbar.getAttribute('max'))
+  //           let diff = (xRef.current-e.pageX)*(max / 1000) //increase decrease 700 to make it slower/faster
+  //           if (diff > 0) diff = Math.ceil(diff)
+  //           else diff = Math.floor(diff)
+  //           if (diff !== 0) {
+  //             const scroll = currentScroll + diff < 0 ? 0 : currentScroll + diff > max ? max : currentScroll + diff
+  //             scrollbar.setAttribute('value', scroll.toString())
+  //             scrollRef.current = scroll.toString()
+  //           }
+  //           xRef.current = e.pageX
+  //     }
+  //   }
+  // }
+    
+  // const mouseUpHandler = function (e) {
+  //     document.body.style.cursor =''
+  //     document.removeEventListener('mousemove', mouseMoveHandler)
+  //     document.removeEventListener('mouseup', mouseUpHandler)
+  //     xRef.current = null
+  // }
 
   // Сэмпл на производительность
 
@@ -141,6 +218,119 @@ const App = () => {
   
 
   const handleClick = (event) => {
+    const ganttChart = document.querySelector('smart-gantt-chart');
+
+    if (event.target.classList.contains('smart-task-connection-point') &&
+            event.target.classList.contains('end')){
+          
+        var c = event.target.getBoundingClientRect(),
+        scrollleft = document.body.scrollLeft + c.left;
+
+          if (event.clientX - scrollleft > 25 ) {
+
+              const elemIndex = event.target.closest('.smart-timeline-task').getAttribute('row-id');
+              const task = ganttChart.getTask(elemIndex);
+      
+              const pattern = /v-(task|epic|subtask)(-childsyncro)?-not-planned/
+              if(!pattern.test(task.class)){
+                ganttChart.updateTask(task.id, { 
+                    "class": task.class + '-not-planned'
+                }); 
+              }
+
+          }
+    }
+
+    // Добавление новой подзадачи
+		if (event.target.classList.contains('add-tb') && !event.target.classList.contains('disabled')) {
+
+      const elemIndex = event.target.closest('tr').getAttribute('row-id');
+
+      //itemProject = ganttChart.getItemPath(ganttChart.getTaskProject(eventDetails.item));
+		 	// const itemIndex = parseInt(ganttChart.getItemPath(eventDetails.item).split('.').slice(-1)[0]) + 1,
+		 	// 	itemProject = ganttChart.getItemPath(ganttChart.getTaskProject(eventDetails.item));
+
+			//Add a new Task
+			// const newItemId = ganttChart.insertTask({
+			// 	label: 'New Task',
+			// 	dateStart: ganttChart.dateStart
+			// }, itemProject, itemIndex);
+      
+      const task = ganttChart.getTask(elemIndex);
+
+      ganttChart.updateTask(task.id, { 
+        type: 'project',
+        expanded: true
+      });
+
+      const pattern = /v-epic/
+      let classForNewTask = 'v-subtask-not-planned';
+      if(pattern.test(task.class)){
+        classForNewTask = 'v-task-not-planned'
+      }
+      
+      // Перед тем как выполнять нужно знать новый id
+      ganttChart.insertTask({
+        id: uuidv4(),
+        number: "ИП-0000000" + taskNumber,
+				label: 'Новое',
+				dateStart: ganttChart.dateStart,
+        class: classForNewTask
+			}, elemIndex, 0);
+
+      setTaskNumber(taskNumber + 1)
+		}
+
+    // Переключение режима syncronized
+		if (event.target.classList.contains('sync-tb') && !event.target.classList.contains('disabled')) {
+
+      const elemIndex = event.target.closest('tr').getAttribute('row-id');
+
+      const task = ganttChart.getTask(elemIndex);
+
+      console.log('Set syncronized: ' + !task.synchronized);
+
+      let taskClass = "";
+      const pattern = /v-(task|epic|subtask)(-childsyncro)?(-not-planned)?/
+      if(task.synchronized){
+        taskClass = task.class.replace(pattern, "v-$1$3")
+      }else{
+        taskClass = task.class.replace(pattern, "v-$1-childsyncro$3")
+      }
+
+      ganttChart.updateTask(task.id, { 
+        synchronized: !task.synchronized,
+        class: taskClass
+      });
+    }
+
+    // Удаление планирования задачи
+    if (event.target.classList.contains('unset-tb') && !event.target.classList.contains('disabled')) {
+
+        const elemIndex = event.target.closest('tr').getAttribute('row-id');
+        const task = ganttChart.getTask(elemIndex);
+
+        const pattern = /v-(task|epic|subtask)(-childsyncro)?-not-planned/
+        if(!pattern.test(task.class)){
+          ganttChart.updateTask(task.id, { 
+              "class": task.class + '-not-planned'
+          }); 
+        }
+		}
+
+    // Возврат предыдущего планирования задачи
+    if (event.target.classList.contains('reset-tb') && !event.target.classList.contains('disabled')) {
+
+      const elemIndex = event.target.closest('tr').getAttribute('row-id');
+      const task = ganttChart.getTask(elemIndex);
+
+      const pattern = /v-(task|epic|subtask)(-childsyncro)?-not-planned/
+      if(pattern.test(task.class)){
+        ganttChart.updateTask(task.id, { 
+            "class": task.class.replace('-not-planned','')
+        }); 
+      }
+  }
 
     // Если клик произошел в рабочем поле таймлайна, то начинаем магию
     if(event.target.className === 'smart-timeline-cell'){
@@ -163,7 +353,7 @@ const App = () => {
         }
       }
 
-      // Получаем заранее записанную в аотрибут dtmom дату ячейки
+      // Получаем заранее записанную в атрибут dtmom дату ячейки
       // Запись в атрибут мы делали при мутации вывода заголовков календаря
 
       // Здесь проверка, вдруг мы забыли добавить <div dtmom='DD.MM.YYYY'></div>
@@ -174,16 +364,14 @@ const App = () => {
 
       const targetdate = headerCell.firstChild.firstChild.getAttribute('dtmom');
 
-      const ganttChart = document.querySelector('smart-gantt-chart');
-
       // Получаем таску по path (https://www.htmlelements.com/docs/gantt-api/#toc-gettask)
-
+      
       const clickedTask = ganttChart.getTask(
             event.target.parentElement.getAttribute('row-id')
           );
 
       // по установленному полу class определяем была ли задача 'not-planned'
-      const pattern = /v-(task|epic|subtask)-not-planned/
+      const pattern = /v-(task|epic|subtask)(-childsyncro)?-not-planned/
 
       if( pattern.test(clickedTask.class) ){
         // если была 'not-planned', то устанавливаем нужные даынне в даты и апдейтим class
@@ -200,7 +388,6 @@ const App = () => {
     }
   }
 
-
   const handleConnEnd = (event) => {
     if(event.detail.type !== 1){
       
@@ -214,7 +401,6 @@ const App = () => {
     } 
   }
 
-
   const handleReady = (event) => {
     const toast = document.querySelector('smart-toast');
     toast.value = "Загрузились"
@@ -226,6 +412,19 @@ const App = () => {
 
     const ganttChart = document.querySelector('smart-gantt-chart');
     ganttChart.scrollWidth = 100;
+
+    //const taskItems = document.getElementsByClassName('smart-task-container')
+    // taskItems[0].(
+    //     <div>
+    //       <p>
+    //         Новый
+    //       </p>
+    //     </div>
+    // )
+
+    //console.log(taskItems)
+
+
   }
 
   const handleReloadData = (event) => {
@@ -251,9 +450,20 @@ const App = () => {
   }
 
 
+
+  const handleScroll = (e) => {
+    e.preventDefault();
+    console.log('Был contextmenu!');
+  }
+
+  React.useEffect(()=>{
+    console.log('из useEffect: ', ganttRef);
+    //ganttRef.current.addEventListener('contextmenu', handleScroll)
+  }, [])
+
+
 	return (
 		<div>
-      <Box></Box>
       <button onClick={handleReloadData}>Reload dataSet</button>
       <div className="option">
           <h3>Детализация:</h3>
@@ -270,8 +480,9 @@ const App = () => {
       <Toast position="top-right" showCloseButton autoClose>Toast!</Toast>
       
 			<GanttChart 
+          ref={ganttRef}
           onReady={handleReady}
-          onClick={handleClick}
+          onClick={(e) => handleClick(e)}
           onConnectionEnd={handleConnEnd}
           min="2023-01-01"
           dateStart="2023-02-25"
